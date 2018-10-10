@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagment;
+using UnityEngine.SceneManagement;
 
 
 public class LoadScene : MonoBehaviour {
 
-	
-	Public Manager manager;	
+	public GameObject manager;
+	public Manager mngr;	
 	
 	void Start ( )
 	{
-		counter = manager.GetComponent<bossCounter>();
+		mngr = manager.GetComponent<Manager>();
 	}
-	void OnTriggerExit (Collider col)
+	void OnTriggerEnter (Collider col)
 	{
 		
 			
@@ -22,29 +22,14 @@ public class LoadScene : MonoBehaviour {
 				Vector3 relativePos = transform.InverseTransformPoint(col.transform.position);
 				if (relativePos.z > 0)
 				{
-					if (counter >= 5)
-					{
-						LoadBossScene();
-					}
+					mngr.LoadNewScene();
 				}
-				else
-				{
-					LoadScene();
-					counter++;
-				}
+				
 				
 			}
 	}
 
-	public void LoadScene(string sceneName)
-	{
-		SceneManager.LoadScene(LevelScene);
-	}		
-	
-	public void LoadBossScene(string bossScene)
-	{
-		SceneManager.LoadScene(BossScene);
-	}	
+		
 		
 
 
